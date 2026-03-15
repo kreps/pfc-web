@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Põlva Võitlusklubi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-dark: #0d0d0d;
+      --bg-card: #1a1a1a;
+      --accent: #e63946;
+      --accent-hover: #ff4d5a;
+      --text: #f1f1f1;
+      --text-muted: #aaa;
+      --border: #2a2a2a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13,13,13,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1.5rem;
+    }
+    .logo {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: var(--accent);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 5rem 1.5rem 3rem;
+      background: linear-gradient(180deg, rgba(230,57,70,0.15) 0%, transparent 100%);
+    }
+    .hero h1 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      margin-bottom: 0.75rem;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* SECTIONS */
+    .section {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+    .section-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.8rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 1.5rem;
+      color: var(--accent);
+    }
+
+    /* SCHEDULE */
+    .schedule-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .schedule-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.75rem;
+      transition: border-color 0.2s;
+    }
+    .schedule-card:hover { border-color: var(--accent); }
+    .schedule-card .day {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.25rem;
+    }
+    .schedule-card .time {
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+    }
+    .schedule-card .type {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .tag {
+      background: rgba(230,57,70,0.15);
+      color: var(--accent);
+      padding: 0.3rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* DISCIPLINES */
+    .disciplines {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .discipline-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.75rem;
+    }
+    .discipline-card h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+    .discipline-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    /* CTA */
+    .cta-section {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      margin: 0 auto;
+      max-width: 960px;
+    }
+    .cta-box {
+      background: linear-gradient(135deg, var(--accent), #c62828);
+      border-radius: 10px;
+      padding: 3rem 2rem;
+    }
+    .cta-box h2 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 0.5rem;
+    }
+    .cta-box p {
+      font-size: 1rem;
+      opacity: 0.9;
+      margin-bottom: 0.75rem;
+    }
+    .cta-box .notice {
+      font-size: 0.85rem;
+      opacity: 0.8;
+      margin-top: 1rem;
+    }
+
+    /* CONTACT */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .contact-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+    .contact-item h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .contact-item p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .contact-item a {
+      color: var(--text);
+      text-decoration: none;
+    }
+    .contact-item a:hover { color: var(--accent); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 2rem 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    footer a:hover { text-decoration: underline; }
+
+    /* MOBILE */
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 2.2rem; }
+      .schedule-grid,
+      .disciplines,
+      .contact-grid { grid-template-columns: 1fr; }
+      .nav-links { gap: 1rem; }
+      .nav-links a { font-size: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="logo">Põlva VK</a>
+      <ul class="nav-links">
+        <li><a href="#ajakava">Ajakava</a></li>
+        <li><a href="#maasvoitlus">Maasvõitlus</a></li>
+        <li><a href="#pustivoitlus">Püstivõitlus</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <h1>Põlva <span>Võitlusklubi</span></h1>
+    <p>MMA &bull; BJJ &bull; Maadlus &bull; Poks &bull; K-1 &bull; Muay Thai</p>
+  </section>
+
+  <section class="section" id="ajakava">
+    <h2 class="section-title">Ajakava</h2>
+    <div class="schedule-grid">
+      <div class="schedule-card">
+        <div class="day">Teisipäev</div>
+        <div class="time">18:00 – 19:30</div>
+        <div class="type">Maasvõitlus</div>
+        <div class="tags">
+          <span class="tag">BJJ</span>
+          <span class="tag">Maadlus</span>
+        </div>
+      </div>
+      <div class="schedule-card">
+        <div class="day">Reede</div>
+        <div class="time">18:00 – 19:30</div>
+        <div class="type">Püstivõitlus</div>
+        <div class="tags">
+          <span class="tag">MMA</span>
+          <span class="tag">Poks</span>
+          <span class="tag">K-1</span>
+          <span class="tag">Muay Thai</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="maasvoitlus">
+    <h2 class="section-title">Maasvõitlus</h2>
+    <div class="disciplines">
+      <div class="discipline-card">
+        <h3>BJJ</h3>
+        <p>Brasiilia jiu-jitsu on maavõitluse kunst, kus kasutatakse kägistusi ja lukke vastase alistamiseks.</p>
+      </div>
+      <div class="discipline-card">
+        <h3>Maadlus</h3>
+        <p>Klassikaline maadlus arendab jõudu, tasakaalu ja kehakontrolli. Ideaalne alus igale võitlejale.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="pustivoitlus">
+    <h2 class="section-title">Püstivõitlus</h2>
+    <div class="disciplines">
+      <div class="discipline-card">
+        <h3>MMA</h3>
+        <p>Mixed Martial Arts ühendab erinevad võitluskunstid üheks tervikuks – nii püsti- kui maasvõitluse.</p>
+      </div>
+      <div class="discipline-card">
+        <h3>Poks</h3>
+        <p>Klassikaline poks arendab kätetööd, jalgade tööd ja reageerimist.</p>
+      </div>
+      <div class="discipline-card">
+        <h3>K-1</h3>
+        <p>Kikipoks, mis lubab lööke kätega, jalgadega ja põlvedega. Kiire ja dünaamiline ala.</p>
+      </div>
+      <div class="discipline-card">
+        <h3>Muay Thai</h3>
+        <p>Tai poks ehk „kaheksa jäseme kunst" – löögid käte, jalgade, küünarnukkide ja põlvedega.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="cta-box">
+      <h2>Liituda saab igal ajal!</h2>
+      <p>Tule kohale ja proovi esimest trenni tasuta.</p>
+      <div class="notice">⚠ Alaealisel (10–15 a.) vajalik vanema nõusolek</div>
+    </div>
+  </section>
+
+  <section class="section" id="kontakt">
+    <h2 class="section-title">Kontakt / Info</h2>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <h3>Asukoht</h3>
+        <p>Põlva, Eesti</p>
+      </div>
+      <div class="contact-item">
+        <h3>Sotsiaalmeedia</h3>
+        <p><a href="https://www.instagram.com/polva_voitlusklubi/" target="_blank" rel="noopener">📷 @polva_voitlusklubi</a></p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Põlva Võitlusklubi. <a href="https://www.instagram.com/polva_voitlusklubi/" target="_blank" rel="noopener">Instagram</a></p>
+  </footer>
+
+</body>
+</html>
