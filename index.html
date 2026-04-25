@@ -105,50 +105,17 @@
     }
 
     /* SCHEDULE */
-    .schedule-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-    }
-    .schedule-card {
+    .schedule-embed {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 1.75rem;
-      transition: border-color 0.2s;
+      overflow: hidden;
     }
-    .schedule-card:hover { border-color: var(--accent); }
-    .schedule-card .day {
-      font-family: 'Oswald', sans-serif;
-      font-size: 1.3rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 0.25rem;
-    }
-    .schedule-card .time {
-      color: var(--accent);
-      font-weight: 600;
-      font-size: 0.95rem;
-      margin-bottom: 0.75rem;
-    }
-    .schedule-card .type {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-    }
-    .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    .tag {
-      background: rgba(230,57,70,0.15);
-      color: var(--accent);
-      padding: 0.3rem 0.75rem;
-      border-radius: 4px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+    .schedule-embed iframe {
+      display: block;
+      width: 100%;
+      height: 700px;
+      border: 0;
     }
 
     /* DISCIPLINES */
@@ -254,9 +221,9 @@
     /* MOBILE */
     @media (max-width: 640px) {
       .hero h1 { font-size: 2.2rem; }
-      .schedule-grid,
       .disciplines,
       .contact-grid { grid-template-columns: 1fr; }
+      .schedule-embed iframe { height: 600px; }
       .nav-links { gap: 1rem; }
       .nav-links a { font-size: 0.75rem; }
     }
@@ -284,27 +251,8 @@
 
   <section class="section" id="ajakava">
     <h2 class="section-title">Ajakava</h2>
-    <div class="schedule-grid">
-      <div class="schedule-card">
-        <div class="day">Teisipäev</div>
-        <div class="time">18:00 – 19:30</div>
-        <div class="type">Maasvõitlus</div>
-        <div class="tags">
-          <span class="tag">BJJ</span>
-          <span class="tag">Maadlus</span>
-        </div>
-      </div>
-      <div class="schedule-card">
-        <div class="day">Reede</div>
-        <div class="time">18:00 – 19:30</div>
-        <div class="type">Püstivõitlus</div>
-        <div class="tags">
-          <span class="tag">MMA</span>
-          <span class="tag">Poks</span>
-          <span class="tag">K-1</span>
-          <span class="tag">Muay Thai</span>
-        </div>
-      </div>
+    <div class="schedule-embed">
+      <iframe src="https://www.regmo.eu/r/pfc/schedule" title="Põlva Võitlusklubi ajakava" loading="lazy"></iframe>
     </div>
   </section>
 
