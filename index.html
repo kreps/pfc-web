@@ -766,20 +766,13 @@
       if (main) main.scrollTo(0, 0);
     }
 
-    function playHomeIntro() {
+    function setupHome() {
       const home = document.querySelector('[data-page="home"]');
       if (!home) return;
       const cards = home.querySelectorAll('.discipline-card');
       const subs = home.querySelectorAll('.home-subtitle span[data-disc]');
       if (!cards.length) return;
       home.classList.add('intro-mode');
-
-      const startDelay = 600;
-      const stepDelay = 8000;
-      let i = 0;
-      let timer = null;
-      let stopped = false;
-      let lastShownAt = 0;
 
       const showCard = (idx) => {
         cards.forEach(c => c.classList.remove('lit'));
@@ -788,54 +781,24 @@
         card.classList.add('lit');
         const sub = home.querySelector(`.home-subtitle span[data-disc="${card.dataset.disc}"]`);
         if (sub) sub.classList.add('active');
-        lastShownAt = Date.now();
       };
 
-      const schedule = (delay) => {
-        if (timer) clearTimeout(timer);
-        timer = setTimeout(advance, delay);
-      };
-
-      const advance = () => {
-        if (stopped) return;
-        showCard(i);
-        i = (i + 1) % cards.length;
-        schedule(stepDelay);
-      };
-
-      const stop = () => {
-        if (stopped) return;
-        stopped = true;
-        if (timer) clearTimeout(timer);
-      };
-
-      cards.forEach(card => card.addEventListener('click', stop));
       subs.forEach(sub => {
         sub.addEventListener('click', () => {
           const disc = sub.dataset.disc;
           const idx = Array.from(cards).findIndex(c => c.dataset.disc === disc);
-          if (idx < 0) return;
-          stop();
-          showCard(idx);
+          if (idx >= 0) showCard(idx);
         });
       });
 
-      document.addEventListener('visibilitychange', () => {
-        if (stopped || document.hidden) return;
-        const elapsed = Date.now() - lastShownAt;
-        const remaining = Math.max(0, stepDelay - elapsed);
-        schedule(remaining);
-      });
-
-      schedule(startDelay);
+      showCard(Math.floor(Math.random() * cards.length));
     }
 
     window.addEventListener('hashchange', render);
     window.addEventListener('DOMContentLoaded', () => {
       render();
-      const onHome = !!document.querySelector('[data-page="home"].active');
-      if (onHome && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        playHomeIntro();
+      if (document.querySelector('[data-page="home"].active')) {
+        setupHome();
       }
     });
   </script>
