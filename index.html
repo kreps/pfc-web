@@ -60,6 +60,9 @@
       padding: 0.75rem 1.5rem;
     }
     .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
       font-family: 'Oswald', sans-serif;
       font-weight: 700;
       font-size: 1.4rem;
@@ -70,6 +73,13 @@
       white-space: nowrap;
     }
     .logo span { color: var(--accent); }
+    .logo img {
+      height: 36px;
+      width: auto;
+      border-radius: 2px;
+      background: #fff;
+      display: block;
+    }
     .nav-links { display: flex; gap: 1.5rem; list-style: none; }
     .nav-links a {
       color: var(--text-muted);
@@ -371,6 +381,11 @@
       width: auto;
       border-radius: 4px;
     }
+    .stebby-link i {
+      font-size: 18px;
+      color: var(--accent);
+      margin-left: auto;
+    }
     .stebby-note {
       color: var(--text-muted);
       font-size: 0.9rem;
@@ -405,6 +420,26 @@
     }
     .bank-card dd { margin: 0; }
     .bank-card .muted { color: var(--text-muted); font-size: 0.8rem; }
+    .pay-or {
+      text-align: center;
+      color: var(--text-muted);
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 0.85rem;
+      margin: 1rem 0;
+      position: relative;
+    }
+    .pay-or::before, .pay-or::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: calc(50% - 1.5rem);
+      height: 1px;
+      background: var(--border);
+    }
+    .pay-or::before { left: 0; }
+    .pay-or::after { right: 0; }
     .prices-table td {
       padding: 0.85rem 1.25rem;
       border-bottom: 1px solid var(--border);
@@ -537,7 +572,8 @@
       }
       .home-right { width: 100%; }
       .home-right .disciplines { min-height: 220px; }
-      .logo { font-size: 1rem; letter-spacing: 1px; }
+      .logo { font-size: 1rem; letter-spacing: 1px; gap: 0.4rem; }
+      .logo img { height: 28px; }
       .nav-links { gap: 0.75rem; }
       .nav-links a { font-size: 0.7rem; letter-spacing: 0.5px; }
       .footer-grid { display: none; }
@@ -551,7 +587,7 @@
 
   <nav>
     <div class="nav-inner">
-      <a href="#/" class="logo">Põlva <span>Fight</span> Club</a>
+      <a href="#/" class="logo"><img src="logo-nav.png" alt="">Põlva <span>Fight</span> Club</a>
       <ul class="nav-links">
         <li><a href="#/ajakava" data-route="ajakava">Ajakava</a></li>
         <li><a href="#/hinnad" data-route="hinnad">Hinnad</a></li>
@@ -647,14 +683,9 @@
               <tr><td>1 kuu, piiramatu</td><td>30 €</td></tr>
             </tbody>
           </table>
-          <p class="stebby-note">Saab tasuda ka spordikompensatsiooniga:</p>
-          <a class="stebby-link" href="https://app.stebby.eu/pos/polva.fight.club" target="_blank" rel="noopener">
-            <img src="https://stebby.eu/wp-content/themes/stebby-eu/assets/logo_bg.jpg" alt="Stebby">
-            <span>Maksa Stebbyga →</span>
-          </a>
         </div>
         <div class="hinnad-col">
-          <h2 class="section-title">Pangaülekanne</h2>
+          <h2 class="section-title">Tasumine</h2>
           <dl class="bank-card">
             <dt>Saaja</dt>
             <dd>Kristjan Kangro</dd>
@@ -665,6 +696,12 @@
             <dt>Ettevõte</dt>
             <dd>Kristjan Kangro FIE <span class="muted">(reg.kood 16671386)</span></dd>
           </dl>
+          <div class="pay-or">või</div>
+          <a class="stebby-link" href="https://app.stebby.eu/pos/polva.fight.club" target="_blank" rel="noopener">
+            <img src="https://stebby.eu/wp-content/themes/stebby-eu/assets/logo_bg.jpg" alt="Stebby">
+            <span>Maksa Stebbyga</span>
+            <i class="ti ti-arrow-right"></i>
+          </a>
         </div>
       </div>
     </section>
