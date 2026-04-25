@@ -4,29 +4,43 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Põlva Võitlusklubi</title>
+  <link rel="icon" type="image/jpeg" href="logo.jpg">
+  <link rel="apple-touch-icon" href="logo.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
   <script src="https://reg-mo-widget.vercel.app/embed.js" data-tenant="polva-fight-club"></script>
+  <script src="https://www.regmo.eu/embed.js" async></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg-dark: #0d0d0d;
-      --bg-card: #1a1a1a;
+      --bg-dark: #ffffff;
+      --bg-card: #f7f7f7;
       --accent: #e63946;
-      --accent-hover: #ff4d5a;
-      --text: #f1f1f1;
-      --text-muted: #aaa;
-      --border: #2a2a2a;
+      --accent-hover: #c62828;
+      --text: #1a1a1a;
+      --text-muted: #555;
+      --border: #e4e4e4;
+      --hero-start: 5.5rem;
+      --hero-end: 3.5rem;
     }
 
     html { scroll-behavior: smooth; }
 
+    html, body { height: 100%; }
     body {
       font-family: 'Open Sans', sans-serif;
       background: var(--bg-dark);
       color: var(--text);
-      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    main {
+      flex: 1;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     /* NAV */
@@ -34,7 +48,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(13,13,13,0.95);
+      background: rgba(255,255,255,0.95);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
     }
@@ -50,11 +64,13 @@
       font-family: 'Oswald', sans-serif;
       font-weight: 700;
       font-size: 1.4rem;
-      color: var(--accent);
+      color: var(--text);
       text-decoration: none;
       text-transform: uppercase;
       letter-spacing: 2px;
+      white-space: nowrap;
     }
+    .logo span { color: var(--accent); }
     .nav-links { display: flex; gap: 1.5rem; list-style: none; }
     .nav-links a {
       color: var(--text-muted);
@@ -68,14 +84,34 @@
     .nav-links a:hover { color: var(--accent); }
 
     /* HERO */
-    .hero {
-      text-align: center;
-      padding: 5rem 1.5rem 3rem;
-      background: linear-gradient(180deg, rgba(230,57,70,0.15) 0%, transparent 100%);
+    .home-grid {
+      display: grid;
+      grid-template-columns: auto auto 1fr;
+      gap: 2rem;
+      align-items: center;
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+    .hero-logo {
+      display: block;
+      width: 100%;
+      max-width: 240px;
+      height: auto;
+    }
+    .home-subtitle {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.15rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
     }
     .hero h1 {
       font-family: 'Oswald', sans-serif;
-      font-size: 3.5rem;
+      font-size: var(--hero-end);
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 4px;
@@ -87,6 +123,59 @@
       color: var(--text-muted);
       max-width: 500px;
       margin: 0 auto;
+    }
+
+    /* INTRO SEQUENCE (inline on home) */
+    .home-right .disciplines {
+      position: relative;
+      min-height: 260px;
+      display: block;
+    }
+    .home-right .discipline-card {
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 100%;
+      max-width: 100%;
+      height: max-content;
+      padding: 2rem 1.75rem;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      pointer-events: none;
+    }
+    .home-right .discipline-card.lit {
+      opacity: 1;
+      transform: translateY(0);
+      border-color: var(--accent);
+      pointer-events: auto;
+      cursor: pointer;
+    }
+    .home-right .discipline-card .card-head i {
+      font-size: 28px;
+    }
+    .home-right .discipline-card h3 {
+      font-size: 1.4rem;
+    }
+    .home-subtitle span {
+      transition: color 0.3s ease, transform 0.3s ease;
+      display: inline-block;
+    }
+    .home-subtitle span[data-disc] { cursor: pointer; }
+    .home-subtitle span[data-disc]:hover { color: var(--accent); }
+    .home-subtitle span.active {
+      color: var(--accent);
+      transform: scale(0.9);
+      font-weight: 600;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .intro-mode .disciplines { position: static; min-height: 0; display: grid; }
+      .intro-mode .discipline-card {
+        position: static;
+        opacity: 1;
+        transform: none;
+      }
     }
 
     /* SECTIONS */
@@ -120,7 +209,7 @@
     .schedule-button {
       display: inline-block;
       background: var(--accent);
-      color: var(--text);
+      color: #fff;
       text-decoration: none;
       font-family: 'Oswald', sans-serif;
       font-weight: 600;
@@ -135,26 +224,46 @@
     /* DISCIPLINES */
     .disciplines {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
     }
     .discipline-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 1.75rem;
+      padding: 1.25rem 1.25rem;
+      transition: transform 0.15s, border-color 0.15s;
+    }
+    .discipline-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+    }
+    .card-head {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.5rem;
+    }
+    .card-head i {
+      font-size: 22px;
+      color: var(--accent);
+      line-height: 1;
+      transition: transform 0.25s ease;
+    }
+    .discipline-card:hover .card-head i {
+      transform: scale(1.2) rotate(-8deg);
     }
     .discipline-card h3 {
       font-family: 'Oswald', sans-serif;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       text-transform: uppercase;
       letter-spacing: 1px;
-      margin-bottom: 0.5rem;
+      margin: 0;
     }
     .discipline-card p {
       color: var(--text-muted);
-      font-size: 0.9rem;
-      line-height: 1.6;
+      font-size: 0.85rem;
+      line-height: 1.55;
     }
 
     /* CTA */
@@ -168,6 +277,7 @@
       background: linear-gradient(135deg, var(--accent), #c62828);
       border-radius: 10px;
       padding: 3rem 2rem;
+      color: #fff;
     }
     .cta-box h2 {
       font-family: 'Oswald', sans-serif;
@@ -221,10 +331,55 @@
     /* FOOTER */
     footer {
       border-top: 1px solid var(--border);
-      text-align: center;
-      padding: 2rem 1.5rem;
+      background: var(--bg-card);
+      padding: 1.5rem 1.5rem 1rem;
       color: var(--text-muted);
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+    .footer-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .footer-grid h4 {
+      font-family: 'Oswald', sans-serif;
       font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+    .footer-grid p { line-height: 1.5; }
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 0.75rem;
+      text-align: center;
+      font-size: 0.75rem;
+    }
+    .footer-compact {
+      display: none;
+    }
+    .footer-compact a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.85rem;
+    }
+    .footer-compact a i { font-size: 18px; color: var(--accent); }
+    .footer-compact-row {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
     }
     footer a {
       color: var(--accent);
@@ -232,13 +387,39 @@
     }
     footer a:hover { text-decoration: underline; }
 
+    /* ROUTER */
+    .page { display: none; }
+    .page.active { display: block; }
+    .nav-links a.active { color: var(--accent); }
+
     /* MOBILE */
     @media (max-width: 640px) {
-      .hero h1 { font-size: 2.2rem; }
+      :root { --hero-start: 3.5rem; --hero-end: 2.2rem; }
       .disciplines,
       .contact-grid { grid-template-columns: 1fr; }
-      .nav-links { gap: 1rem; }
-      .nav-links a { font-size: 0.75rem; }
+      .home-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1.5rem 1rem;
+        justify-items: center;
+      }
+      .hero-logo { max-width: 200px; }
+      .home-subtitle {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.75rem;
+        font-size: 1rem;
+      }
+      .home-right { width: 100%; }
+      .home-right .disciplines { min-height: 220px; }
+      .logo { font-size: 1rem; letter-spacing: 1px; }
+      .nav-links { gap: 0.75rem; }
+      .nav-links a { font-size: 0.7rem; letter-spacing: 0.5px; }
+      .footer-grid { display: none; }
+      .footer-compact { display: block; }
+      footer { padding: 0.75rem 1rem 0.5rem; }
+      .footer-bottom { padding-top: 0.5rem; font-size: 0.7rem; }
     }
   </style>
 </head>
@@ -246,92 +427,228 @@
 
   <nav>
     <div class="nav-inner">
-      <a href="#" class="logo">Põlva VK</a>
+      <a href="#/" class="logo">Põlva <span>Võitlusklubi</span></a>
       <ul class="nav-links">
-        <li><a href="#ajakava">Ajakava</a></li>
-        <li><a href="#maasvoitlus">Maasvõitlus</a></li>
-        <li><a href="#pustivoitlus">Püstivõitlus</a></li>
-        <li><a href="#kontakt">Kontakt</a></li>
-        <li><a href="#" data-regmo-open>Registreeri</a></li>
+        <li><a href="#/ajakava" data-route="ajakava">Ajakava</a></li>
+        <li><a href="#/hinnad" data-route="hinnad">Hinnad</a></li>
+        <li><a href="#" data-regmo-open>Liitu</a></li>
       </ul>
     </div>
   </nav>
 
-  <section class="hero">
-    <h1>Põlva <span>Võitlusklubi</span></h1>
-    <p>MMA &bull; BJJ &bull; Maadlus &bull; Poks &bull; K-1 &bull; Muay Thai</p>
-  </section>
+  <main id="app">
+    <section class="page" data-page="home">
+      <div class="home-grid">
+        <img class="hero-logo" src="logo.jpg" alt="Põlva Fight Club">
+        <div class="home-subtitle">
+          <span data-disc="bjj">BJJ</span>
+          <span data-disc="maadlus">Maadlus</span>
+          <span data-disc="poks">Poks</span>
+          <span data-disc="k1">K-1</span>
+          <span data-disc="muaythai">Muay Thai</span>
+        </div>
+        <div class="home-right">
+          <div class="disciplines">
+          <div class="discipline-card" data-disc="bjj">
+            <div class="card-head">
+              <i class="ti ti-triangle" aria-hidden="true"></i>
+              <h3>BJJ</h3>
+            </div>
+            <p>Brasiilia jiu-jitsu — maavõitluse kunst, kus kasutatakse kägistusi ja lukke vastase alistamiseks.</p>
+          </div>
+          <div class="discipline-card" data-disc="maadlus">
+            <div class="card-head">
+              <i class="ti ti-users" aria-hidden="true"></i>
+              <h3>Maadlus</h3>
+            </div>
+            <p>Klassikaline maadlus arendab jõudu, tasakaalu ja kehakontrolli. Ideaalne alus igale võitlejale.</p>
+          </div>
+          <div class="discipline-card" data-disc="poks">
+            <div class="card-head">
+              <i class="ti ti-boxing-glove" aria-hidden="true"></i>
+              <h3>Poks</h3>
+            </div>
+            <p>Klassikaline poks arendab kätetööd, jalgade tööd ja reageerimist.</p>
+          </div>
+          <div class="discipline-card" data-disc="k1">
+            <div class="card-head">
+              <i class="ti ti-karate" aria-hidden="true"></i>
+              <h3>K-1</h3>
+            </div>
+            <p>Kikipoks, mis lubab lööke kätega, jalgadega ja põlvedega. Kiire ja dünaamiline ala.</p>
+          </div>
+          <div class="discipline-card" data-disc="muaythai">
+            <div class="card-head">
+              <i class="ti ti-flame" aria-hidden="true"></i>
+              <h3>Muay Thai</h3>
+            </div>
+            <p>Tai poks ehk „kaheksa jäseme kunst" — löögid käte, jalgade, küünarnukkide ja põlvedega.</p>
+          </div>
+        </div>
+      </div>
+      </div>
 
-  <section class="section" id="ajakava">
-    <h2 class="section-title">Ajakava</h2>
-    <div class="schedule-cta">
-      <p>Vaata trennide ajakava ja registreeru osalema.</p>
-      <a class="schedule-button" href="https://www.regmo.eu/r/pfc/schedule" target="_blank" rel="noopener">Ava ajakava →</a>
-    </div>
-  </section>
+    </section>
 
-  <section class="section" id="maasvoitlus">
-    <h2 class="section-title">Maasvõitlus</h2>
-    <div class="disciplines">
-      <div class="discipline-card">
-        <h3>BJJ</h3>
-        <p>Brasiilia jiu-jitsu on maavõitluse kunst, kus kasutatakse kägistusi ja lukke vastase alistamiseks.</p>
+    <section class="page" data-page="ajakava">
+      <div class="section">
+        <div data-regmo-schedule="pfc"></div>
       </div>
-      <div class="discipline-card">
-        <h3>Maadlus</h3>
-        <p>Klassikaline maadlus arendab jõudu, tasakaalu ja kehakontrolli. Ideaalne alus igale võitlejale.</p>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section" id="pustivoitlus">
-    <h2 class="section-title">Püstivõitlus</h2>
-    <div class="disciplines">
-      <div class="discipline-card">
-        <h3>MMA</h3>
-        <p>Mixed Martial Arts ühendab erinevad võitluskunstid üheks tervikuks – nii püsti- kui maasvõitluse.</p>
+    <section class="page" data-page="hinnad">
+      <div class="section">
+        <h2 class="section-title">Hinnad</h2>
+        <div class="contact-grid">
+          <div class="contact-item">
+            <h3>Esimene trenn</h3>
+            <p>Tasuta</p>
+          </div>
+          <div class="contact-item">
+            <h3>1 kuu</h3>
+            <p>30 €</p>
+          </div>
+          <div class="contact-item">
+            <h3>1 kord</h3>
+            <p>5 €</p>
+          </div>
+        </div>
       </div>
-      <div class="discipline-card">
-        <h3>Poks</h3>
-        <p>Klassikaline poks arendab kätetööd, jalgade tööd ja reageerimist.</p>
-      </div>
-      <div class="discipline-card">
-        <h3>K-1</h3>
-        <p>Kikipoks, mis lubab lööke kätega, jalgadega ja põlvedega. Kiire ja dünaamiline ala.</p>
-      </div>
-      <div class="discipline-card">
-        <h3>Muay Thai</h3>
-        <p>Tai poks ehk „kaheksa jäseme kunst" – löögid käte, jalgade, küünarnukkide ja põlvedega.</p>
-      </div>
-    </div>
-  </section>
 
-  <section class="cta-section" id="registreeri">
-    <div class="cta-box">
-      <h2>Liituda saab igal ajal!</h2>
-      <p>Tule kohale ja proovi esimest trenni tasuta.</p>
-      <div class="notice">⚠ Alaealisel (10–15 a.) vajalik vanema nõusolek</div>
-    </div>
-  </section>
-
-
-  <section class="section" id="kontakt">
-    <h2 class="section-title">Kontakt / Info</h2>
-    <div class="contact-grid">
-      <div class="contact-item">
-        <h3>Asukoht</h3>
-        <p>Põlva, Eesti</p>
+      <div class="section">
+        <h2 class="section-title">Pangaülekanne</h2>
+        <div class="contact-grid">
+          <div class="contact-item">
+            <h3>Saaja</h3>
+            <p>Kristjan Kangro</p>
+          </div>
+          <div class="contact-item">
+            <h3>IBAN</h3>
+            <p>EE247700771008880470</p>
+          </div>
+          <div class="contact-item">
+            <h3>Selgitus</h3>
+            <p>Osaleja nimi ja kuu (nt. „Mari Maasikas, jaanuar")</p>
+          </div>
+          <div class="contact-item">
+            <h3>Ettevõte</h3>
+            <p>Kristjan Kangro FIE<br><span style="color:var(--text-muted);font-size:0.85rem;">reg.kood: 16671386</span></p>
+          </div>
+        </div>
       </div>
-      <div class="contact-item">
-        <h3>Sotsiaalmeedia</h3>
-        <p><a href="https://www.instagram.com/polva_voitlusklubi/" target="_blank" rel="noopener">📷 @polva_voitlusklubi</a></p>
-      </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <footer>
-    <p>&copy; 2026 Põlva Võitlusklubi. <a href="https://www.instagram.com/polva_voitlusklubi/" target="_blank" rel="noopener">Instagram</a></p>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <h4>Asukoht</h4>
+          <p>Põlva Spordikool<br>Uus 3, Aeroobikasaal</p>
+        </div>
+        <div>
+          <h4>Telefon</h4>
+          <p><a href="tel:+37256989963">+372 56 989 963</a></p>
+        </div>
+        <div>
+          <h4>E-post</h4>
+          <p><a href="mailto:kristjan.bjj@gmail.com">kristjan.bjj@gmail.com</a></p>
+        </div>
+        <div>
+          <h4>Sotsiaalmeedia</h4>
+          <p><a href="https://www.instagram.com/polva_voitlusklubi/" target="_blank" rel="noopener">@polva_voitlusklubi</a></p>
+        </div>
+      </div>
+      <div class="footer-compact">
+        <div class="footer-compact-row">
+          <a href="tel:+37256989963" aria-label="Helista"><i class="ti ti-phone"></i><span>Helista</span></a>
+          <a href="mailto:kristjan.bjj@gmail.com" aria-label="E-post"><i class="ti ti-mail"></i><span>E-post</span></a>
+          <a href="https://www.instagram.com/polva_voitlusklubi/" target="_blank" rel="noopener" aria-label="Instagram"><i class="ti ti-brand-instagram"></i><span>Instagram</span></a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Põlva Võitlusklubi</p>
+      </div>
+    </div>
   </footer>
+
+  <script>
+    const routes = ['home', 'ajakava', 'hinnad'];
+
+    function render() {
+      const route = (location.hash.replace(/^#\/?/, '') || 'home').split('/')[0];
+      const target = routes.includes(route) ? route : 'home';
+
+      document.querySelectorAll('.page').forEach(p => {
+        p.classList.toggle('active', p.dataset.page === target);
+      });
+      document.querySelectorAll('.nav-links a[data-route]').forEach(a => {
+        a.classList.toggle('active', a.dataset.route === target);
+      });
+
+      const main = document.querySelector('main');
+      if (main) main.scrollTo(0, 0);
+    }
+
+    function playHomeIntro() {
+      const home = document.querySelector('[data-page="home"]');
+      if (!home) return;
+      const cards = home.querySelectorAll('.discipline-card');
+      const subs = home.querySelectorAll('.home-subtitle span[data-disc]');
+      if (!cards.length) return;
+      home.classList.add('intro-mode');
+
+      const startDelay = 600;
+      const stepDelay = 1500;
+      let i = 0;
+      let timer;
+      let stopped = false;
+
+      const showCard = (idx) => {
+        cards.forEach(c => c.classList.remove('lit'));
+        subs.forEach(s => s.classList.remove('active'));
+        const card = cards[idx];
+        card.classList.add('lit');
+        const sub = home.querySelector(`.hero p span[data-disc="${card.dataset.disc}"]`);
+        if (sub) sub.classList.add('active');
+      };
+
+      const advance = () => {
+        if (stopped) return;
+        showCard(i);
+        i = (i + 1) % cards.length;
+        timer = setTimeout(advance, stepDelay);
+      };
+
+      const stop = () => {
+        if (stopped) return;
+        stopped = true;
+        clearTimeout(timer);
+      };
+
+      cards.forEach(card => card.addEventListener('click', stop));
+      subs.forEach(sub => {
+        sub.addEventListener('click', () => {
+          const disc = sub.dataset.disc;
+          const idx = Array.from(cards).findIndex(c => c.dataset.disc === disc);
+          if (idx < 0) return;
+          stop();
+          showCard(idx);
+        });
+      });
+
+      timer = setTimeout(advance, startDelay);
+    }
+
+    window.addEventListener('hashchange', render);
+    window.addEventListener('DOMContentLoaded', () => {
+      render();
+      const onHome = !!document.querySelector('[data-page="home"].active');
+      if (onHome && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        playHomeIntro();
+      }
+    });
+  </script>
 
 </body>
 </html>
