@@ -740,29 +740,36 @@
       const startDelay = 600;
       const stepDelay = 8000;
       let i = 0;
-      let timer;
+      let timer = null;
       let stopped = false;
+      let lastShownAt = 0;
 
       const showCard = (idx) => {
         cards.forEach(c => c.classList.remove('lit'));
         subs.forEach(s => s.classList.remove('active'));
         const card = cards[idx];
         card.classList.add('lit');
-        const sub = home.querySelector(`.hero p span[data-disc="${card.dataset.disc}"]`);
+        const sub = home.querySelector(`.home-subtitle span[data-disc="${card.dataset.disc}"]`);
         if (sub) sub.classList.add('active');
+        lastShownAt = Date.now();
+      };
+
+      const schedule = (delay) => {
+        if (timer) clearTimeout(timer);
+        timer = setTimeout(advance, delay);
       };
 
       const advance = () => {
         if (stopped) return;
         showCard(i);
         i = (i + 1) % cards.length;
-        timer = setTimeout(advance, stepDelay);
+        schedule(stepDelay);
       };
 
       const stop = () => {
         if (stopped) return;
         stopped = true;
-        clearTimeout(timer);
+        if (timer) clearTimeout(timer);
       };
 
       cards.forEach(card => card.addEventListener('click', stop));
@@ -776,7 +783,14 @@
         });
       });
 
-      timer = setTimeout(advance, startDelay);
+      document.addEventListener('visibilitychange', () => {
+        if (stopped || document.hidden) return;
+        const elapsed = Date.now() - lastShownAt;
+        const remaining = Math.max(0, stepDelay - elapsed);
+        schedule(remaining);
+      });
+
+      schedule(startDelay);
     }
 
     window.addEventListener('hashchange', render);
