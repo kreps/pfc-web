@@ -9,7 +9,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
-  <script src="https://reg-mo-widget.vercel.app/embed.js" data-tenant="polva-fight-club"></script>
   <script src="https://www.regmo.eu/embed.js" async></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -556,7 +555,7 @@
       <ul class="nav-links">
         <li><a href="#/ajakava" data-route="ajakava">Ajakava</a></li>
         <li><a href="#/hinnad" data-route="hinnad">Hinnad</a></li>
-        <li><a href="#" data-regmo-open>Liitu</a></li>
+        <li><a href="#/liitu" data-route="liitu">Liitu</a></li>
       </ul>
     </div>
   </nav>
@@ -624,7 +623,15 @@
 
     <section class="page" data-page="ajakava">
       <div class="section">
-        <div data-regmo-schedule="pfc"></div>
+        <h2 class="section-title">Ajakava</h2>
+        <div data-regmo-schedule="pfc" data-regmo-header="false"></div>
+      </div>
+    </section>
+
+    <section class="page" data-page="liitu">
+      <div class="section">
+        <h2 class="section-title">Liitu</h2>
+        <div data-regmo-register="pfc"></div>
       </div>
     </section>
 
@@ -705,7 +712,7 @@
   </footer>
 
   <script>
-    const routes = ['home', 'ajakava', 'hinnad'];
+    const routes = ['home', 'ajakava', 'hinnad', 'liitu'];
 
     function render() {
       const route = (location.hash.replace(/^#\/?/, '') || 'home').split('/')[0];
