@@ -86,25 +86,37 @@
     /* HERO */
     .home-grid {
       display: grid;
-      grid-template-columns: auto auto 1fr;
+      grid-template-columns: auto 1fr;
       gap: 2rem;
-      align-items: center;
-      max-width: 1040px;
+      align-items: start;
+      max-width: 960px;
       margin: 0 auto;
       padding: 2rem 1.5rem;
+      justify-items: start;
+    }
+    .brand-block {
+      display: flex;
+      align-items: stretch;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--bg-card);
     }
     .hero-logo {
       display: block;
-      width: 100%;
-      max-width: 240px;
+      width: 160px;
       height: auto;
+      flex-shrink: 0;
     }
     .home-subtitle {
       display: flex;
       flex-direction: column;
-      gap: 0.4rem;
+      justify-content: center;
+      gap: 0.35rem;
+      padding: 0.75rem 1rem;
+      border-left: 1px solid var(--border);
       font-family: 'Oswald', sans-serif;
-      font-size: 1.15rem;
+      font-size: 1rem;
       letter-spacing: 1px;
       text-transform: uppercase;
       color: var(--text-muted);
@@ -126,21 +138,24 @@
     }
 
     /* INTRO SEQUENCE (inline on home) */
+    .home-right {
+      width: 100%;
+      padding-top: 28px;
+    }
     .home-right .disciplines {
       position: relative;
-      min-height: 260px;
+      min-height: 132px;
       display: block;
+      width: 100%;
     }
     .home-right .discipline-card {
       position: absolute;
-      inset: 0;
-      margin: auto;
-      width: 100%;
-      max-width: 100%;
-      height: max-content;
-      padding: 2rem 1.75rem;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 1.5rem 1.5rem;
       opacity: 0;
-      transform: translateY(16px);
+      transform: translateY(12px);
       transition: opacity 0.5s ease, transform 0.5s ease;
       pointer-events: none;
     }
@@ -233,6 +248,30 @@
       border-radius: 8px;
       padding: 1.25rem 1.25rem;
       transition: transform 0.15s, border-color 0.15s;
+      position: relative;
+      overflow: visible;
+    }
+    .card-tab {
+      position: absolute;
+      top: 0;
+      left: 1.25rem;
+      transform: translateY(-100%);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-bottom: none;
+      border-radius: 6px 6px 0 0;
+      padding: 0.3rem 0.7rem 0.4rem;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .discipline-card.lit .card-tab,
+    .home-right .discipline-card.lit .card-tab {
+      border-color: var(--accent);
+      color: var(--accent);
     }
     .discipline-card:hover {
       transform: translateY(-2px);
@@ -297,6 +336,89 @@
       margin-top: 1rem;
     }
 
+    /* PRICES TABLE */
+    .prices-table {
+      width: 100%;
+      max-width: 480px;
+      border-collapse: collapse;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+    .stebby-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.85rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.65rem 1.25rem;
+      text-decoration: none;
+      color: var(--text);
+      font-family: 'Oswald', sans-serif;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .stebby-link:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .stebby-link img {
+      height: 28px;
+      width: auto;
+      border-radius: 4px;
+    }
+    .stebby-note {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+    }
+    .hinnad-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+      align-items: start;
+    }
+    .bank-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.5rem 1rem;
+      font-size: 0.95rem;
+    }
+    .bank-card dt {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding-top: 0.15rem;
+    }
+    .bank-card dd { margin: 0; }
+    .bank-card .muted { color: var(--text-muted); font-size: 0.8rem; }
+    .prices-table td {
+      padding: 0.85rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.95rem;
+    }
+    .prices-table tr:last-child td { border-bottom: none; }
+    .prices-table td:last-child {
+      text-align: right;
+      font-family: 'Oswald', sans-serif;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
     /* CONTACT */
     .contact-grid {
       display: grid;
@@ -359,7 +481,7 @@
     .footer-bottom {
       border-top: 1px solid var(--border);
       padding-top: 0.75rem;
-      text-align: center;
+      text-align: left;
       font-size: 0.75rem;
     }
     .footer-compact {
@@ -373,12 +495,16 @@
       text-decoration: none;
       font-size: 0.85rem;
     }
-    .footer-compact a i { font-size: 18px; color: var(--accent); }
+    .footer-compact a i { font-size: 22px; color: var(--accent); }
+    .social-icons { display: flex; gap: 0.75rem; margin-top: 0.25rem; }
+    .social-icons a { color: var(--accent); display: inline-flex; }
+    .social-icons a i { font-size: 22px; }
+    .social-icons a:hover { color: var(--accent-hover); }
     .footer-compact-row {
       display: flex;
-      justify-content: space-around;
+      justify-content: flex-start;
       align-items: center;
-      gap: 0.75rem;
+      gap: 1rem;
       flex-wrap: wrap;
     }
     footer a {
@@ -396,20 +522,19 @@
     @media (max-width: 640px) {
       :root { --hero-start: 3.5rem; --hero-end: 2.2rem; }
       .disciplines,
-      .contact-grid { grid-template-columns: 1fr; }
+      .contact-grid,
+      .hinnad-row { grid-template-columns: 1fr; }
       .home-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
         padding: 1.5rem 1rem;
-        justify-items: center;
+        justify-items: start;
       }
-      .hero-logo { max-width: 200px; }
+      .hero-logo { width: 130px; }
       .home-subtitle {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 0.75rem;
-        font-size: 1rem;
+        font-size: 0.9rem;
+        gap: 0.25rem;
+        padding: 0.5rem 0.75rem;
       }
       .home-right { width: 100%; }
       .home-right .disciplines { min-height: 220px; }
@@ -427,7 +552,7 @@
 
   <nav>
     <div class="nav-inner">
-      <a href="#/" class="logo">Põlva <span>Võitlusklubi</span></a>
+      <a href="#/" class="logo">Põlva <span>Fight</span> Club</a>
       <ul class="nav-links">
         <li><a href="#/ajakava" data-route="ajakava">Ajakava</a></li>
         <li><a href="#/hinnad" data-route="hinnad">Hinnad</a></li>
@@ -439,17 +564,20 @@
   <main id="app">
     <section class="page" data-page="home">
       <div class="home-grid">
-        <img class="hero-logo" src="logo.jpg" alt="Põlva Fight Club">
-        <div class="home-subtitle">
-          <span data-disc="bjj">BJJ</span>
-          <span data-disc="maadlus">Maadlus</span>
-          <span data-disc="poks">Poks</span>
-          <span data-disc="k1">K-1</span>
-          <span data-disc="muaythai">Muay Thai</span>
+        <div class="brand-block">
+          <img class="hero-logo" src="logo.jpg" alt="Põlva Fight Club">
+          <div class="home-subtitle">
+            <span data-disc="bjj">BJJ</span>
+            <span data-disc="maadlus">Maadlus</span>
+            <span data-disc="poks">Poks</span>
+            <span data-disc="k1">K-1</span>
+            <span data-disc="muaythai">Muay Thai</span>
+          </div>
         </div>
         <div class="home-right">
           <div class="disciplines">
           <div class="discipline-card" data-disc="bjj">
+            <span class="card-tab">Maasvõitlus</span>
             <div class="card-head">
               <i class="ti ti-triangle" aria-hidden="true"></i>
               <h3>BJJ</h3>
@@ -457,6 +585,7 @@
             <p>Brasiilia jiu-jitsu — maavõitluse kunst, kus kasutatakse kägistusi ja lukke vastase alistamiseks.</p>
           </div>
           <div class="discipline-card" data-disc="maadlus">
+            <span class="card-tab">Maasvõitlus</span>
             <div class="card-head">
               <i class="ti ti-users" aria-hidden="true"></i>
               <h3>Maadlus</h3>
@@ -464,6 +593,7 @@
             <p>Klassikaline maadlus arendab jõudu, tasakaalu ja kehakontrolli. Ideaalne alus igale võitlejale.</p>
           </div>
           <div class="discipline-card" data-disc="poks">
+            <span class="card-tab">Püstivõitlus</span>
             <div class="card-head">
               <i class="ti ti-boxing-glove" aria-hidden="true"></i>
               <h3>Poks</h3>
@@ -471,6 +601,7 @@
             <p>Klassikaline poks arendab kätetööd, jalgade tööd ja reageerimist.</p>
           </div>
           <div class="discipline-card" data-disc="k1">
+            <span class="card-tab">Püstivõitlus</span>
             <div class="card-head">
               <i class="ti ti-karate" aria-hidden="true"></i>
               <h3>K-1</h3>
@@ -478,6 +609,7 @@
             <p>Kikipoks, mis lubab lööke kätega, jalgadega ja põlvedega. Kiire ja dünaamiline ala.</p>
           </div>
           <div class="discipline-card" data-disc="muaythai">
+            <span class="card-tab">Püstivõitlus</span>
             <div class="card-head">
               <i class="ti ti-flame" aria-hidden="true"></i>
               <h3>Muay Thai</h3>
@@ -497,43 +629,35 @@
     </section>
 
     <section class="page" data-page="hinnad">
-      <div class="section">
-        <h2 class="section-title">Hinnad</h2>
-        <div class="contact-grid">
-          <div class="contact-item">
-            <h3>Esimene trenn</h3>
-            <p>Tasuta</p>
-          </div>
-          <div class="contact-item">
-            <h3>1 kuu</h3>
-            <p>30 €</p>
-          </div>
-          <div class="contact-item">
-            <h3>1 kord</h3>
-            <p>5 €</p>
-          </div>
+      <div class="hinnad-row">
+        <div class="hinnad-col">
+          <h2 class="section-title">Hinnad</h2>
+          <table class="prices-table">
+            <tbody>
+              <tr><td>Esimene nädal</td><td>Tasuta</td></tr>
+              <tr><td>1 kord</td><td>7 €</td></tr>
+              <tr><td>1 kuu, 4 trenni</td><td>20 €</td></tr>
+              <tr><td>1 kuu, piiramatu</td><td>30 €</td></tr>
+            </tbody>
+          </table>
+          <p class="stebby-note">Saab tasuda ka spordikompensatsiooniga:</p>
+          <a class="stebby-link" href="https://app.stebby.eu/pos/polva.fight.club" target="_blank" rel="noopener">
+            <img src="https://stebby.eu/wp-content/themes/stebby-eu/assets/logo_bg.jpg" alt="Stebby">
+            <span>Maksa Stebbyga →</span>
+          </a>
         </div>
-      </div>
-
-      <div class="section">
-        <h2 class="section-title">Pangaülekanne</h2>
-        <div class="contact-grid">
-          <div class="contact-item">
-            <h3>Saaja</h3>
-            <p>Kristjan Kangro</p>
-          </div>
-          <div class="contact-item">
-            <h3>IBAN</h3>
-            <p>EE247700771008880470</p>
-          </div>
-          <div class="contact-item">
-            <h3>Selgitus</h3>
-            <p>Osaleja nimi ja kuu (nt. „Mari Maasikas, jaanuar")</p>
-          </div>
-          <div class="contact-item">
-            <h3>Ettevõte</h3>
-            <p>Kristjan Kangro FIE<br><span style="color:var(--text-muted);font-size:0.85rem;">reg.kood: 16671386</span></p>
-          </div>
+        <div class="hinnad-col">
+          <h2 class="section-title">Pangaülekanne</h2>
+          <dl class="bank-card">
+            <dt>Saaja</dt>
+            <dd>Kristjan Kangro</dd>
+            <dt>IBAN</dt>
+            <dd>EE247700771008880470</dd>
+            <dt>Selgitus</dt>
+            <dd>Osaleja nimi ja kuu (nt. „Mari Maasikas, jaanuar")</dd>
+            <dt>Ettevõte</dt>
+            <dd>Kristjan Kangro FIE <span class="muted">(reg.kood 16671386)</span></dd>
+          </dl>
         </div>
       </div>
     </section>
@@ -547,23 +671,31 @@
           <p>Põlva Spordikool<br>Uus 3, Aeroobikasaal</p>
         </div>
         <div>
-          <h4>Telefon</h4>
+          <h4>Kontakt</h4>
           <p><a href="tel:+37256989963">+372 56 989 963</a></p>
-        </div>
-        <div>
-          <h4>E-post</h4>
           <p><a href="mailto:kristjan.bjj@gmail.com">kristjan.bjj@gmail.com</a></p>
         </div>
         <div>
+          <h4>Arvelduskonto</h4>
+          <p>Kristjan Kangro</p>
+          <p>EE247700771008880470</p>
+        </div>
+        <div>
           <h4>Sotsiaalmeedia</h4>
-          <p><a href="https://www.instagram.com/polva_voitlusklubi/" target="_blank" rel="noopener">@polva_voitlusklubi</a></p>
+          <div class="social-icons">
+            <a href="https://www.instagram.com/polva_fightclub/" target="_blank" rel="noopener" aria-label="Instagram"><i class="ti ti-brand-instagram"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=61567222260203" target="_blank" rel="noopener" aria-label="Facebook"><i class="ti ti-brand-facebook"></i></a>
+            <a href="https://www.tiktok.com/@polva.fightclub" target="_blank" rel="noopener" aria-label="TikTok"><i class="ti ti-brand-tiktok"></i></a>
+          </div>
         </div>
       </div>
       <div class="footer-compact">
         <div class="footer-compact-row">
-          <a href="tel:+37256989963" aria-label="Helista"><i class="ti ti-phone"></i><span>Helista</span></a>
-          <a href="mailto:kristjan.bjj@gmail.com" aria-label="E-post"><i class="ti ti-mail"></i><span>E-post</span></a>
-          <a href="https://www.instagram.com/polva_voitlusklubi/" target="_blank" rel="noopener" aria-label="Instagram"><i class="ti ti-brand-instagram"></i><span>Instagram</span></a>
+          <a href="tel:+37256989963" aria-label="Helista"><i class="ti ti-phone"></i></a>
+          <a href="mailto:kristjan.bjj@gmail.com" aria-label="E-post"><i class="ti ti-mail"></i></a>
+          <a href="https://www.instagram.com/polva_fightclub/" target="_blank" rel="noopener" aria-label="Instagram"><i class="ti ti-brand-instagram"></i></a>
+          <a href="https://www.facebook.com/profile.php?id=61567222260203" target="_blank" rel="noopener" aria-label="Facebook"><i class="ti ti-brand-facebook"></i></a>
+          <a href="https://www.tiktok.com/@polva.fightclub" target="_blank" rel="noopener" aria-label="TikTok"><i class="ti ti-brand-tiktok"></i></a>
         </div>
       </div>
       <div class="footer-bottom">
@@ -599,7 +731,7 @@
       home.classList.add('intro-mode');
 
       const startDelay = 600;
-      const stepDelay = 1500;
+      const stepDelay = 8000;
       let i = 0;
       let timer;
       let stopped = false;
